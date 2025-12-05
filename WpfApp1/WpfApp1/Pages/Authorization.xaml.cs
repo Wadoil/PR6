@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using WpfApp1.Models;
 using WpfApp1.Services;
 
@@ -22,13 +24,16 @@ namespace WpfApp1.Pages
     /// </summary>
     public partial class Authorization : Page
     {
-        private int click;
+        private int tries;
         private bool isCaptchaRequired;
+        DispatcherTimer timer;
+        int timeRemaining;
 
         public Authorization()
         {
             InitializeComponent();
-            click = 0;
+            InitializeBlockTimer();
+            tries = 0;
             isCaptchaRequired = false;
 
             // Скрываем капчу при запуске
@@ -61,23 +66,76 @@ namespace WpfApp1.Pages
             string login = txtLogin.Text.Trim();
             string password = pswbPassword.Password.Trim();
 
-            // Проверяем, что поля не пустые
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Введите логин и пароль!");
                 return;
             }
 
-            // Первая попытка входа - проверяем логин/пароль и просим пройти капчу
-            if (click == 0)
+            if (tries == 0 && !isCaptchaRequired)
             {
                 CheckCredentialsAndRequestCaptcha(login, password);
             }
-            // Вторая попытка - проверяем логин/пароль и капчу
-            else if (click == 1 && isCaptchaRequired)
+            else if ((tries % 3 != 0 || tries == 0) && isCaptchaRequired) // три попытки ввода капчи
             {
                 CheckCredentialsWithCaptcha(login, password);
             }
+            else // блокировка экрана
+            {
+                timeRemaining = 10;
+                timer.Start();
+                LockUI();
+                tries = 0;
+                CheckCredentialsWithCaptcha(login, password);
+            }
+        }
+
+        private void InitializeBlockTimer()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += BlockTimer;
+        }
+
+        private void BlockTimer(object sender, EventArgs e)
+        {
+            timeRemaining--;
+
+            if (timeRemaining <= 0)
+            {
+                UnlockUI();
+                timer.Stop();
+            }
+            else
+            {
+                txtBlockTimer.Text = $"До разблокировки осталось: {timeRemaining} сек";
+            }
+        }
+
+        private void LockUI()
+        {
+            btnEnter.IsEnabled = false;
+            btnEnterGuests.IsEnabled = false;
+            txtLogin.IsEnabled = false;
+            pswbPassword.IsEnabled = false;
+            txtBoxCaptcha.IsEnabled = false;
+
+            txtBlockTimer.Visibility = Visibility.Visible;
+            txtBlockTimer.Foreground = Brushes.Red;
+            txtBlockTimer.Text = $"До разблокировки осталось: {timeRemaining} сек";
+        }
+
+        private void UnlockUI()
+        {
+            btnEnter.IsEnabled = true;
+            btnEnterGuests.IsEnabled = true;
+            txtLogin.IsEnabled = true;
+            pswbPassword.IsEnabled = true;
+            txtBoxCaptcha.IsEnabled = true;
+
+            txtBlockTimer.Visibility = Visibility.Collapsed;
+
+            tries = 0;
         }
 
         private void CheckCredentialsAndRequestCaptcha(string login, string password)
@@ -96,7 +154,7 @@ namespace WpfApp1.Pages
                     if (isPasswordValid)
                     {
                         // Логин и пароль верные, просим пройти капчу
-                        click = 1;
+                        tries = 1;
                         MessageBox.Show("Пройдите капчу для завершения входа.");
                         GenerateCaptcha();
                     }
@@ -138,16 +196,17 @@ namespace WpfApp1.Pages
 
                     if (isPasswordValid && isCaptchaValid)
                     {
-                        // Успешная авторизация
-                        MessageBox.Show("Вы успешно авторизовались!");
-
                         // Проверяем, является ли пользователь работником или клиентом
                         var employee = db.Employees.FirstOrDefault(s => s.Authorisation_ID == authorisation.ID);
                         var customer = db.Clients.FirstOrDefault(c => c.Authorisation_ID == authorisation.ID);
-
-                        if (employee != null)
+                        
+                        if (employee != null && TimeHelper.IsWithinWorkingHours())
                         {
                             LoadPage("Employee", authorisation, employee);
+                        }
+                        else if (employee != null && !TimeHelper.IsWithinWorkingHours())
+                        {
+                            MessageBox.Show("Дождитесь рабочего времени");
                         }
                         else if (customer != null)
                         {
@@ -163,24 +222,27 @@ namespace WpfApp1.Pages
                         MessageBox.Show("Попробуйте снова.");
                         txtBoxCaptcha.Text = "";
                         GenerateCaptcha(); // Генерируем новую капчу
+                        tries += 1;
                     }
                     else
                     {
                         MessageBox.Show("Неверный логин или пароль попробуйте снова.");
                         ResetAuthorizationForm();
+                        tries += 1;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Пользователь с таким логином не найдены.");
+                    MessageBox.Show("Пользователь с таким логином не найден.");
                     ResetAuthorizationForm();
+                    tries += 1;
                 }
             }
         }
 
         private void ResetAuthorizationForm()
         {
-            click = 0;
+            tries = 0;
             isCaptchaRequired = false;
             txtLogin.Text = "";
             pswbPassword.Password = "";
@@ -209,7 +271,6 @@ namespace WpfApp1.Pages
             }
         }
 
-        // Добавьте этот метод в ваш XAML для TextBlock капчи (если нужно обновить капчу)
         private void txtBlockCaptcha_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (isCaptchaRequired)

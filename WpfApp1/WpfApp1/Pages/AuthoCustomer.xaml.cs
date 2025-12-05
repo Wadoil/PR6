@@ -32,7 +32,7 @@ namespace WpfApp1.Pages
                 // Формируем полное имя
 
                 // Обновляем текстовые блоки
-                WelcomeBlock.Text = $"Добро пожаловать, {CustomerData.Name}!";
+                WelcomeBlock.Text = $"{TimeHelper.GetTimeOfDayGreeting()}, {CustomerData.Name}!";
                 NameBlock.Text = CustomerData.Name;
                 MarketBlock.Text = db.Markets.FirstOrDefault(x => x.ID == CustomerData.Market_ID).Name ?? "Не указан";
                 ContactsBlock.Text = CustomerData.Contact_Info ?? "Не указаны";

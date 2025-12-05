@@ -32,7 +32,7 @@ namespace WpfApp1.Pages
                 string fullName = $"{EmployeeData.Surname} {EmployeeData.Name} {EmployeeData.Patronymic}".Replace("  ", " ").Trim();
 
                 // Обновляем текстовые блоки
-                WelcomeBlock.Text = $"Добро пожаловать, {EmployeeData.Name}!";
+                WelcomeBlock.Text = $"{TimeHelper.GetTimeOfDayGreeting()}, {EmployeeData.Name}!";
                 FullNameBlock.Text = fullName;
                 DepartmentBlock.Text = db.Departments.FirstOrDefault(x => x.ID == EmployeeData.Department_ID).Name ?? "Не указан";
                 PositionBlock.Text = db.Position.FirstOrDefault(x => x.ID == EmployeeData.Position_ID).Name ?? "Не указан";

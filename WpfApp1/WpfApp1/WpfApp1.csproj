@@ -135,6 +135,7 @@
     <Compile Include="Pages\AuthoCustomer.xaml.cs">
       <DependentUpon>AuthoCustomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\TimeHelper.cs" />
     <Compile Include="Services\CaptchaGenerator.cs" />
     <Compile Include="Services\Hash.cs" />
     <Page Include="MainWindow.xaml">
