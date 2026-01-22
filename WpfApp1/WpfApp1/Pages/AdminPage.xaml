@@ -23,7 +23,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Name="debugbox" Grid.ColumnSpan="4"/>
-        <ListView Name="MainListView" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4" d:ItemsSource="{d:SampleData ItemCount=12}">
+        <ListView Name="MainListView" Grid.RowSpan="5" Grid.ColumnSpan="4" d:ItemsSource="{d:SampleData ItemCount=12}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

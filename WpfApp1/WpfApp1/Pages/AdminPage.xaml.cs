@@ -39,7 +39,14 @@ namespace WpfApp1.Pages
                 User user = new User();
                 user.Initials = employees[i].Surname + employees[i].Name[0] + '.' + employees[i].Patronymic[0];
                 user.FullName = employees[i].Surname + employees[i].Name + employees[i].Patronymic;
-                //user.Role = db.Position.Where(x => x.ID == employees[i].Position_ID).FirstOrDefault().Name;
+                try
+                {
+                    user.Role = db.Position.Where(x => x.ID == employees[i].Position_ID).FirstOrDefault().Name;
+                }
+                catch (Exception ex)
+                {
+                    debugbox.Text = $"{ex.ToString()}";
+                }
                 user.OtherInfo = $"Дата найма {employees[i].Hire_Date}, зарплата {employees[i].Salary}";
                 users.Add(user);
             }
