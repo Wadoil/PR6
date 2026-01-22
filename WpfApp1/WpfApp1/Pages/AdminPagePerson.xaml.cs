@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Models;
 
 namespace WpfApp1.Pages
 {
@@ -20,8 +21,11 @@ namespace WpfApp1.Pages
     /// </summary>
     public partial class AdminPagePerson : Page
     {
-        public AdminPagePerson()
+        public AdminPagePerson(User user)
         {
+            var db = new Entities();
+            var employees = db.Employees.ToList();
+
             InitializeComponent();
         }
     }

@@ -26,7 +26,7 @@ namespace WpfApp1.Pages
         {
             var currentTime = DateTime.Now.TimeOfDay;
             var startTime = TimeSpan.Parse("10:00");
-            var endTime = TimeSpan.Parse("19:00");
+            var endTime = TimeSpan.Parse("23:59"); //19:00
 
             return currentTime >= startTime && currentTime <= endTime;
         }

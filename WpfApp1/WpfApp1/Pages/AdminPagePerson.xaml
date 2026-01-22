@@ -11,42 +11,52 @@
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Имя:" FontSize="16" Margin="60 15 00 0"/>
-        <TextBox Name="NameEntry" Grid.Column="1" Text="{Binding Name}"/>
-        <TextBlock Text="Фамилия:" FontSize="16" Margin="60 15 00 0" Grid.Row="1" />
-        <TextBox Name="SurnameEntry" Grid.Column="1" Grid.Row="1" Text="{Binding Surname}"/>
-        <TextBlock Text="Отчество:" FontSize="16" Margin="60 15 00 0" Grid.Row="2" />
-        <TextBox Name="PatronymicEntry" Grid.Column="1" Grid.Row="2" Text="{Binding Patronymic}"/>
-        <TextBlock Text="Должность:" FontSize="16" Margin="60 15 00 0" Grid.Row="3" />
-        <TextBox Name="PositionEntry" Grid.Column="1" Grid.Row="3" Text="{Binding Position}"/>
-        <TextBlock Text="Отдел:" FontSize="16" Margin="60 15 00 0" Grid.Row="4" />
-        <TextBox Name="DepartmentEntry" Grid.Column="1" Grid.Row="4" Text="{Binding Department}"/>
-        <TextBlock Text="Дата найма:" FontSize="16" Margin="60 15 00 0" Grid.Row="5" />
-        <TextBox Name="HireDateEntry" Grid.Column="1" Grid.Row="5" Text="{Binding HireDate}"/>
-        <TextBlock Text="Логин:" FontSize="16" Margin="60 15 00 0" Grid.Row="6" />
-        <TextBox Name="LoginEntry" Grid.Column="1" Grid.Row="6" Text="{Binding Login}"/>
-        <TextBlock Text="Пароль:" FontSize="16" Margin="60 15 00 0" Grid.Row="7" />
-        <TextBox Name="PasswordEntry" Grid.Column="1" Grid.Row="7" Text="{Binding Password}"/>
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Имя:" FontSize="16" Margin="60 15 00 0"/>
+                <TextBox Name="NameEntry" Grid.Column="1" Text="{Binding Name}"/>
+                <TextBlock Text="Фамилия:" FontSize="16" Margin="60 15 00 0" Grid.Row="1" />
+                <TextBox Name="SurnameEntry" Grid.Column="1" Grid.Row="1" Text="{Binding Surname}"/>
+                <TextBlock Text="Отчество:" FontSize="16" Margin="60 15 00 0" Grid.Row="2" />
+                <TextBox Name="PatronymicEntry" Grid.Column="1" Grid.Row="2" Text="{Binding Patronymic}"/>
+                <TextBlock Text="Должность:" FontSize="16" Margin="60 15 00 0" Grid.Row="3" />
+                <TextBox Name="PositionEntry" Grid.Column="1" Grid.Row="3" Text="{Binding Position}"/>
+                <TextBlock Text="Отдел:" FontSize="16" Margin="60 15 00 0" Grid.Row="4" />
+                <TextBox Name="DepartmentEntry" Grid.Column="1" Grid.Row="4" Text="{Binding Department}"/>
+                <TextBlock Text="Дата найма:" FontSize="16" Margin="60 15 00 0" Grid.Row="5" />
+                <TextBox Name="HireDateEntry" Grid.Column="1" Grid.Row="5" Text="{Binding HireDate}"/>
+                <TextBlock Text="Логин:" FontSize="16" Margin="60 15 00 0" Grid.Row="6" />
+                <TextBox Name="LoginEntry" Grid.Column="1" Grid.Row="6" Text="{Binding Login}"/>
+                <TextBlock Text="Пароль:" FontSize="16" Margin="60 15 00 0" Grid.Row="7" />
+                <TextBox Name="PasswordEntry" Grid.Column="1" Grid.Row="7" Text="{Binding Password}"/>
 
-        <Image Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="124,18,122,21" Source="/Resources/logo.png"/>
-        <Button Content="Добавить фото" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="141,10,139,10"/>
+                <Image Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="124,18,122,21" Source="/Resources/logo.png"/>
+                <Button Content="Добавить фото" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="141,10,139,10"/>
 
-        <Button Name="SaveBtn" Content="Сохранить" Grid.Row="8" Grid.Column="1" Margin="40,10,40,10"/>
-        <Button Name="ClearBtn" Content="Очистить" Grid.Row="8" Grid.Column="2" Margin="40,10,40,10"/>
+                <Button Name="SaveBtn" Content="Сохранить" Grid.Row="8" Grid.Column="1" Margin="40,10,40,10"/>
+                <Button Name="ClearBtn" Content="Очистить" Grid.Row="8" Grid.Column="2" Margin="40,10,40,10"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

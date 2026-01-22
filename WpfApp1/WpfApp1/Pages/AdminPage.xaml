@@ -23,7 +23,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Name="debugbox" Grid.ColumnSpan="4"/>
-        <ListView Name="MainListView" Grid.RowSpan="5" Grid.ColumnSpan="4" d:ItemsSource="{d:SampleData ItemCount=12}">
+        <ListView Name="MainListView" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4" d:ItemsSource="{d:SampleData ItemCount=12}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -31,7 +31,7 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black">
+                    <Border BorderBrush="Black" MouseLeftButtonDown="OpenPerson">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -39,19 +39,12 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-
                             <Border Grid.Column="0" Width="50" Height="50" CornerRadius="25" Background="#E3F2FD" Margin="0,0,15,0">
                                 <TextBlock Text="{Binding Initials}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#1976D2"/>
                             </Border>
 
                             <StackPanel Grid.Column="1">
                                 <TextBlock Text="{Binding FullName}" FontSize="16" FontWeight="SemiBold"/>
-                                <TextBlock Text="{Binding Email}" FontSize="13" Foreground="#666"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="2" HorizontalAlignment="Right">
-                                <TextBlock Text="{Binding Role}" FontSize="12" Foreground="#1976D2" Margin="0,0,0,5"/>
-                                <Ellipse Width="10" Height="10"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="3" HorizontalAlignment="Left">
