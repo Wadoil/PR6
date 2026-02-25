@@ -26,7 +26,15 @@ namespace WpfApp1.Pages
             var db = new Entities();
             var employees = db.Employees.ToList();
 
+            string[] fullname = user.FullName.Split();
+            var employee = employees.Where(x => fullname[0] == x.Surname && fullname[1] == x.Name && fullname[2] == x.Patronymic).FirstOrDefault();
+            
             InitializeComponent();
+
+            if (employee != null) 
+            {
+                NameEntry.AppendText(employee.Name);
+            }
         }
     }
 }

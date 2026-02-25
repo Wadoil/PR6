@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,6 +37,10 @@ namespace WpfApp1.Pages
                 FullNameBlock.Text = fullName;
                 DepartmentBlock.Text = db.Departments.FirstOrDefault(x => x.ID == EmployeeData.Department_ID).Name ?? "Не указан";
                 PositionBlock.Text = db.Position.FirstOrDefault(x => x.ID == EmployeeData.Position_ID).Name ?? "Не указан";
+                if (EmployeeData.Position_ID == 2)
+                {
+                    PanelBtn.Visibility = Visibility.Visible;
+                }
             }
             else
             {
@@ -44,6 +49,11 @@ namespace WpfApp1.Pages
                 DepartmentBlock.Text = "Информация недоступна";
                 PositionBlock.Text = "Информация недоступна";
             }
+        }
+
+        private void PanelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdminPage());
         }
     }
 }

@@ -260,8 +260,7 @@ namespace WpfApp1.Pages
             switch (role)
             {
                 case "Employee":
-                    //NavigationService.Navigate(new AuthEmployee(authorisation, (Employees)userData));
-                    NavigationService.Navigate(new AdminPage());
+                    NavigationService.Navigate(new AuthEmployee(authorisation, (Employees)userData));
                     break;
                 case "Client":
                     NavigationService.Navigate(new AuthoCustomer(authorisation, (Clients)userData));

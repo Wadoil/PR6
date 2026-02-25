@@ -9,6 +9,9 @@
       Title="AuthEmployee">
 
     <Grid>
+
+        <Button x:Name="PanelBtn" Visibility="Collapsed" Content="Админ Панель" Margin="74,393,73,27" Click="PanelBtn_Click"></Button>
+        
         <Border Background="White" Padding="20" CornerRadius="10" BorderBrush="Gray" BorderThickness="1"
             HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel>
