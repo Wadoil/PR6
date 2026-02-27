@@ -25,6 +25,9 @@ namespace WpfApp1.Pages
         public string Initials { get; set; }
         public string FullName { get; set; }
         public string OtherInfo { get; set; }
+        public string Name {  get; set; }
+        public string Surname { get; set; }
+        public string Patronymic { get; set; }
     }
     public partial class AdminPage : Page
     {
@@ -37,7 +40,10 @@ namespace WpfApp1.Pages
             for (int i = 0; i != employees.Count; i++) {
                 User user = new User();
                 user.Initials = employees[i].Surname + employees[i].Name[0] + '.' + employees[i].Patronymic[0];
-                user.FullName = employees[i].Surname + employees[i].Name + employees[i].Patronymic;
+                user.FullName = employees[i].Surname + ' ' + employees[i].Name + ' ' + employees[i].Patronymic;
+                user.Name = employees[i].Name;
+                user.Surname = employees[i].Surname;
+                user.Patronymic = employees[i].Patronymic;
                 user.OtherInfo = $"Дата найма {employees[i].Hire_Date}, зарплата {employees[i].Salary}";
                 users.Add(user);
             }
