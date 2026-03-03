@@ -5,58 +5,211 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="AdminPagePerson">
 
-    <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <Grid Height="450">
+
+        <!-- Заголовок -->
+        <Border Grid.Row="0" Background="#ff498c51" Padding="20">
+            <TextBlock x:Name="TitleTextBlock" 
+                       Text="Placeholder" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       Foreground="White"/>
+        </Border>
+
+        <!-- Основное содержимое -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="20">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Имя:" FontSize="16" Margin="60 15 00 0"/>
-                <TextBox Name="NameEntry" Grid.Column="1"/>
-                <TextBlock Text="Фамилия:" FontSize="16" Margin="60 15 00 0" Grid.Row="1" />
-                <TextBox Name="SurnameEntry" Grid.Column="1" Grid.Row="1"/>
-                <TextBlock Text="Отчество:" FontSize="16" Margin="60 15 00 0" Grid.Row="2" />
-                <TextBox Name="PatronymicEntry" Grid.Column="1" Grid.Row="2"/>
-                <TextBlock Text="Должность:" FontSize="16" Margin="60 15 00 0" Grid.Row="3" />
-                <TextBox Name="PositionEntry" Grid.Column="1" Grid.Row="3"/>
-                <TextBlock Text="Отдел:" FontSize="16" Margin="60 15 00 0" Grid.Row="4" />
-                <TextBox Name="DepartmentEntry" Grid.Column="1" Grid.Row="4"/>
-                <TextBlock Text="Дата найма:" FontSize="16" Margin="60 15 00 0" Grid.Row="5" />
-                <TextBox Name="HireDateEntry" Grid.Column="1" Grid.Row="5"/>
-                <TextBlock Text="Логин:" FontSize="16" Margin="60 15 00 0" Grid.Row="6" />
-                <TextBox Name="LoginEntry" Grid.Column="1" Grid.Row="6"/>
-                <TextBlock Text="Пароль:" FontSize="16" Margin="60 15 00 0" Grid.Row="7" />
-                <TextBox Name="PasswordEntry" Grid.Column="1" Grid.Row="7"/>
 
-                <Image Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="124,18,122,21" Source="/Resources/logo.png"/>
-                <Button Content="Добавить фото" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="141,10,139,10"/>
+                <!-- Левая колонка - данные сотрудника -->
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,20,0">
+                    <Border Background="White" CornerRadius="5" Padding="20" Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock Text="Персональные данные" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15"/>
 
-                <Button Name="SaveBtn" Content="Сохранить" Grid.Row="8" Grid.Column="1" Margin="40,10,40,10" Click="SaveBtn_Click"/>
-                <Button Name="ClearBtn" Content="Очистить" Grid.Row="8" Grid.Column="2" Margin="40,10,40,10" Click="ClearBtn_Click"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Фамилия -->
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Фамилия:" FontSize="14" VerticalAlignment="Center" Margin="0,10"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Name="SurnameEntry" Height="30" Margin="0,5" Padding="5"/>
+
+                                <!-- Имя -->
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Имя:" FontSize="14" VerticalAlignment="Center" Margin="0,10"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Name="NameEntry" Height="30" Margin="0,5" Padding="5"/>
+
+                                <!-- Отчество -->
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Отчество:" FontSize="14" VerticalAlignment="Center" Margin="0,10"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" Name="PatronymicEntry" Height="30" Margin="0,5" Padding="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="White" CornerRadius="5" Padding="20" Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock Text="Рабочая информация" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15"/>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Должность -->
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Должность:" FontSize="14" VerticalAlignment="Center" Margin="0,10"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Name="PositionEntry" Height="30" Margin="0,5" Padding="5"/>
+
+                                <!-- Отдел -->
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Отдел:" FontSize="14" VerticalAlignment="Center" Margin="0,10"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Name="DepartmentEntry" Height="30" Margin="0,5" Padding="5"/>
+
+                                <!-- Дата найма -->
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата найма:" FontSize="14" VerticalAlignment="Center" Margin="0,10"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" Name="HireDateEntry" Height="30" Margin="0,5" Padding="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="White" CornerRadius="5" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="Данные для входа" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15"/>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Логин -->
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Логин:" FontSize="14" VerticalAlignment="Center" Margin="0,10"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Name="LoginEntry" Height="30" Margin="0,5" Padding="5"/>
+
+                                <!-- Пароль -->
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Пароль:" FontSize="14" VerticalAlignment="Center" Margin="0,10"/>
+                                <PasswordBox Grid.Row="1" Grid.Column="1" Name="PasswordEntry" Height="30" Margin="0,5" Padding="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <Border Background="White" CornerRadius="5" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="Фотография" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15"/>
+                            <Image Source="/Resources/logo.png" Width="150" Height="150"/>
+
+                            <Button Content="Загрузить фото" 
+                                    Height="35" 
+                                    BorderThickness="0"
+                                    Margin="0,0,0,10">
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
             </Grid>
-        </StackPanel>
+        </ScrollViewer>
+
+        <!-- Нижняя панель с кнопками -->
+        <Border Grid.Row="2" Background="White" Padding="20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="SaveBtn" Content="Сохранить" 
+                        Width="100" Height="35"
+                        Background="#1976D2" Foreground="White"
+                        BorderThickness="0" Margin="0,0,10,0"
+                        Click="SaveBtn_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                                CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Center" 
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Name="ClearBtn" Content="Очистить" 
+                        Width="100" Height="35"
+                        Background="#9E9E9E" Foreground="White"
+                        BorderThickness="0" Margin="0,0,10,0"
+                        Click="ClearBtn_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                                CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Center" 
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Name="CancelBtn" Content="Отмена" 
+                        Width="100" Height="35"
+                        Background="#F44336" Foreground="White"
+                        BorderThickness="0"
+                        Click="CancelBtn_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                                CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Center" 
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

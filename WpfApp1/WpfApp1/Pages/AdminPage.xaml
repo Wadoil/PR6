@@ -10,49 +10,81 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="searcLine" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" Margin="5,45,5,20">Поиск</TextBox>
 
-        <Button x:Name="searchBtn" Grid.Row="0" Grid.Column="2" Content="Поиск"/>
-        <Button x:Name="createBtn" Grid.Row="0" Grid.Column="3" Content="Создать"/>
-        <ListView Name="MainListView" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4" d:ItemsSource="{d:SampleData ItemCount=12}">
+        <!-- Панель поиска -->
+        <StackPanel Grid.ColumnSpan="4" Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
+            <TextBox x:Name="searcLine" Width="300" Height="30" 
+                     Text="Поиск" 
+                     Foreground="Gray"
+                     Margin="0,0,10,0"/>
+            <Button x:Name="searchBtn" Content="Поиск" Width="80" Height="30" 
+                    Click="SearchBtn_Click" Margin="0,0,10,0"/>
+            <Button x:Name="createBtn" Content="Создать" Width="80" Height="30" 
+                    Click="CreateBtn_Click"/>
+        </StackPanel>
+
+        <!-- Список сотрудников -->
+        <ListView Name="MainListView" Grid.Row="1" Grid.ColumnSpan="4" Margin="10"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="0,0,0,5"/>
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" MouseLeftButtonDown="OpenPerson">
-                        <Grid>
+                    <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="5"
+                            Background="White" MouseLeftButtonDown="OpenPerson"
+                            Cursor="Hand">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#F5F5F5"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid Margin="10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Width="50" Height="50" CornerRadius="25" Background="#E3F2FD" Margin="0,0,15,0">
-                                <TextBlock Text="{Binding Initials}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#1976D2"/>
+
+                            <!-- Аватар с инициалами -->
+                            <Border Grid.Column="0" Width="50" Height="50" CornerRadius="25" 
+                                    Background="#E3F2FD" Margin="0,0,15,0">
+                                <TextBlock Text="{Binding Initials}" 
+                                           VerticalAlignment="Center" 
+                                           HorizontalAlignment="Center" 
+                                           FontSize="16" FontWeight="Bold" 
+                                           Foreground="#1976D2"/>
                             </Border>
 
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Text="{Binding FullName}" FontSize="16" FontWeight="SemiBold"/>
+                            <!-- ФИО -->
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding FullName}" 
+                                           FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
 
-                            <StackPanel Grid.Column="3" HorizontalAlignment="Left">
-                                <TextBlock Width="600" TextWrapping="Wrap" Text="{Binding OtherInfo}"/>
-                            </StackPanel>                        
+                            <!-- Дополнительная информация -->
+                            <StackPanel Grid.Column="2" Margin="20,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding OtherInfo}" 
+                                           TextWrapping="Wrap"
+                                           Foreground="#666666"/>
+                            </StackPanel>
                         </Grid>
                     </Border>
                 </DataTemplate>
