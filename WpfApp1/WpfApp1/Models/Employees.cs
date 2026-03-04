@@ -11,7 +11,8 @@ namespace WpfApp1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employees
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,15 +20,23 @@ namespace WpfApp1.Models
         {
             this.Contract = new HashSet<Contract>();
         }
-    
+        
+        [Required]
         public int ID { get; set; }
+        [Required(ErrorMessage = "Необходимо указать имя сотрудника")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Необходимо указать фамилию сотрудника")]
         public string Surname { get; set; }
         public string Patronymic { get; set; }
+        [Required(ErrorMessage = "Необходимо указать идентификатор должности сотрудника")]
         public int Position_ID { get; set; }
+        [Required(ErrorMessage = "Необходимо указать идентификатор отдела сотрудника")]
         public int Department_ID { get; set; }
+        [Required(ErrorMessage = "Необходимо указать дату найма сотрудника")]
         public System.DateTime Hire_Date { get; set; }
+        [Required(ErrorMessage = "Необходимо указать заработную плату сотрудника")]
         public decimal Salary { get; set; }
+        [Required(ErrorMessage = "Необходимо указать идентификатор авторизации сотрудника")]
         public Nullable<int> Authorisation_ID { get; set; }
     
         public virtual Authorisation Authorisation { get; set; }
