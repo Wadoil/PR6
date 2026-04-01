@@ -22,6 +22,11 @@ namespace WpfApp1.Pages
     /// </summary>
     public partial class AuthEmployee : Page
     {
+        /// <summary>
+        /// Выводит данные сотрудника на страницу пользователя
+        /// </summary>
+        /// <param name="auth">данные авторизации сотрудника</param>
+        /// <param name="EmployeeData">данные сотрудника</param>
         public AuthEmployee(Authorisation auth, Employees EmployeeData)
         {
             InitializeComponent();

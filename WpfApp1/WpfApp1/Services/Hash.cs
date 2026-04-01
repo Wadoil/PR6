@@ -12,8 +12,8 @@ namespace WpfApp1.Services
         /// <summary>
         /// Хэширует заданный пароль с использованием алгоритма SHA256.
         /// </summary>
-        /// <param name="password">Пароль, который необходимо хэшировать.</param>
-        /// <returns>Строковое представление хэша пароля в шестнадцатеричном формате.</returns>
+        /// <param name="password">Пароль, который необходимо хэшировать</param>
+        /// <returns>Строковое представление хэша пароля в шестнадцатеричном формате</returns>
         public static string HashPassword(string password)
         {
             using (SHA256 shs256Hash = SHA256.Create())

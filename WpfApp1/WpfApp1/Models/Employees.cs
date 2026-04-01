@@ -12,6 +12,7 @@ namespace WpfApp1.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Runtime.CompilerServices;
 
     public partial class Employees
     {
@@ -27,6 +28,7 @@ namespace WpfApp1.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Необходимо указать фамилию сотрудника")]
         public string Surname { get; set; }
+
         public string Patronymic { get; set; }
         [Required(ErrorMessage = "Необходимо указать идентификатор должности сотрудника")]
         public int Position_ID { get; set; }
@@ -36,7 +38,7 @@ namespace WpfApp1.Models
         public System.DateTime Hire_Date { get; set; }
         [Required(ErrorMessage = "Необходимо указать заработную плату сотрудника")]
         public decimal Salary { get; set; }
-        [Required(ErrorMessage = "Необходимо указать идентификатор авторизации сотрудника")]
+        [Required]
         public Nullable<int> Authorisation_ID { get; set; }
     
         public virtual Authorisation Authorisation { get; set; }

@@ -8,6 +8,10 @@ namespace WpfApp1.Pages
 {
     internal class TimeHelper
     {
+        /// <summary>
+        /// Проверяет время входа сотрудника
+        /// </summary>
+        /// <returns>Пожелание доброго времени суток</returns>
         public static string GetTimeOfDayGreeting()
         {
             var currentTime = DateTime.Now.TimeOfDay;
@@ -21,7 +25,6 @@ namespace WpfApp1.Pages
             else
                 return "Доброй ночи"; // для времени вне рабочих часов
         }   
-
         public static bool IsWithinWorkingHours()
         {
             var currentTime = DateTime.Now.TimeOfDay;

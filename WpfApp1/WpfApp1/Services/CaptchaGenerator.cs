@@ -14,8 +14,8 @@ namespace WpfApp1.Services
         /// <summary>
         /// Генерирует случайный текст заданной длины для капчи.
         /// </summary>
-        /// <param name="length">Длина текста капчи.</param>
-        /// <returns>Случайный текст капчи.</returns>
+        /// <param name="length">Длина текста капчи</param>
+        /// <returns>Случайный текст капчи</returns>
         public static string GenerateCaptchaText(int length)
         {
             if (length <= 0)

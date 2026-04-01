@@ -21,7 +21,11 @@ namespace WpfApp1.Pages
     /// </summary>
     public partial class AuthoCustomer : Page
     {
-
+        /// <summary>
+        /// Выводит данные сотрудника на страницу пользователя
+        /// </summary>
+        /// <param name="auth">Данные авторизации пользователя</param>
+        /// <param name="CustomerData">Данные пользователя</param>
         public AuthoCustomer(Authorisation auth, Clients CustomerData)
         {
             InitializeComponent();

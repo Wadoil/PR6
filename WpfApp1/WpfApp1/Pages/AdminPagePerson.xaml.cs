@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
@@ -50,7 +52,9 @@ namespace WpfApp1.Pages
                 TitleTextBlock.Text = "Редактирование сотрудника";
             }
         }
-
+        /// <summary>
+        /// Выгружает данные сотрудника на страницу редактирования
+        /// </summary>
         private void LoadEmployeeData()
         {
             try
@@ -82,6 +86,8 @@ namespace WpfApp1.Pages
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
+            var context = new ValidationContext(_currentEmployee);
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
             using (var transaction = _db.Database.BeginTransaction())
             {
                 try
@@ -140,9 +146,7 @@ namespace WpfApp1.Pages
                             _currentEmployee.Hire_Date = hireDate;
                         }
 
-                        // Добавляем сотрудника сначала
-                        _db.Employees.Add(_currentEmployee);
-                        _db.SaveChanges();
+                        
 
                         // Создание записи авторизации
                         _currentAuth = new Authorisation
@@ -185,9 +189,16 @@ namespace WpfApp1.Pages
                             }
                         }
                     }
-
-                    _db.SaveChanges();
-                    transaction.Commit();
+                    if (Validator.TryValidateObject(_currentEmployee, context, results, true))
+                    {
+                        _db.Employees.Add(_currentEmployee);
+                        _db.SaveChanges();
+                        transaction.Commit();
+                    }
+                    else
+                    {
+                        MessageBox.Show("чё-т сломалось");
+                    }
 
                     MessageBox.Show(_isNewEmployee ? "Сотрудник успешно добавлен!" : "Данные успешно сохранены!",
                         "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -214,7 +225,10 @@ namespace WpfApp1.Pages
                 }
             }
         }
-
+        /// <summary>
+        /// Генерирует логин для пользователя
+        /// </summary>
+        /// <returns>фамилия.и</returns>
         private string GenerateDefaultLogin()
         {
             string baseLogin = $"{SurnameEntry.Text.Trim().ToLower()}.{NameEntry.Text.Trim().ToLower().Substring(0, 1)}";

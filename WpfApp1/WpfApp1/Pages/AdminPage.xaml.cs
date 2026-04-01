@@ -44,7 +44,9 @@ namespace WpfApp1.Pages
                 _db = new Entities();
                 LoadEmployees();
             }
-
+            /// <summary>
+            /// Выгружает данные сотрудников из базы в таблицу
+            /// </summary>
             private void LoadEmployees()
             {
                 try
@@ -108,7 +110,7 @@ namespace WpfApp1.Pages
 
             private void ApplyFilter()
             {
-                string searchText = searcLine.Text?.ToLower().Trim() ?? "";
+                string searchText = searcLine.Text?.ToLower().Trim();
 
                 if (string.IsNullOrWhiteSpace(searchText) || searchText == "поиск")
                 {
@@ -144,7 +146,6 @@ namespace WpfApp1.Pages
                     MessageBox.Show($"Ошибка при создании сотрудника: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-
             private void OpenPerson(object sender, MouseButtonEventArgs e)
             {
                 try
